@@ -1,0 +1,26 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toh3r/Chat-App.git"
+  },
+  "author": "Toh3r",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toh3r/Chat-App/issues"
+  },
+  "homepage": "https://github.com/Toh3r/Chat-App#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
