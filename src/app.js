@@ -2,6 +2,7 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
+const Filter = require('bad-words')
 
 const app = express();
 // SocketIO needs to be passed the raw http server
@@ -23,13 +24,21 @@ io.on('connection', (socket) => {
     // Only emit to other connections
     socket.broadcast.emit('message', 'A new user has joined')
 
-    socket.on('sendMessage', (message) => {
+    socket.on('sendMessage', (message, callback) => {
+        const filter = new Filter();
+
+        if (filter.isProfane(message)) {
+            return callback('You Dirty Bastard');
+        }
+
         io.emit('message', message); // emit to all clients
+        callback(); // Acknowledges event
     });
 
-    socket.on('sendLocation', (coords) => {
+    socket.on('sendLocation', (coords, callback) => {
         const userCoords = `https://google.com/maps?q=${coords.latitude},${coords.longitude}`
         io.emit('message', userCoords); // emit to all clients
+        callback();
     });
 
     // When connection is disconnected

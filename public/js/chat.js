@@ -13,8 +13,15 @@ document.querySelector('#message-form').addEventListener('submit', (e) => {
     // e represents everything being listened for on the form
     const message = e.target.elements.message.value;
 
-    // // Emit to server
-    socket.emit('sendMessage', message);
+    // Emit to server
+    // function runs when event was acknowledged
+    socket.emit('sendMessage', message, (error) => {
+       if (error) {
+           return console.log(error);
+       }
+
+       console.log('Message Delivered');
+    });
 });
 
 document.querySelector('#send-location').addEventListener('click', () => {
@@ -29,7 +36,9 @@ document.querySelector('#send-location').addEventListener('click', () => {
             longitude: position.coords.longitude
         };
 
-        socket.emit('sendLocation', coords);
+        socket.emit('sendLocation', coords, () => {
+            console.log('Location Shared');
+        });
     });
 });
 
