@@ -20,8 +20,21 @@ io.on('connection', (socket) => {
 
     socket.emit('message', 'Welcome'); // Emit to single client
 
+    // Only emit to other connections
+    socket.broadcast.emit('message', 'A new user has joined')
+
     socket.on('sendMessage', (message) => {
         io.emit('message', message); // emit to all clients
+    });
+
+    socket.on('sendLocation', (coords) => {
+        const userCoords = `https://google.com/maps?q=${coords.latitude},${coords.longitude}`
+        io.emit('message', userCoords); // emit to all clients
+    });
+
+    // When connection is disconnected
+    socket.on('disconnect', () => {
+        io.emit('message', 'User has left')
     });
 });
 
