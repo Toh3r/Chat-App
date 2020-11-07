@@ -2,7 +2,8 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketio = require('socket.io');
-const Filter = require('bad-words')
+const Filter = require('bad-words');
+const { generateMessage, generateLocationMessage } = require('./utils/messages')
 
 const app = express();
 // SocketIO needs to be passed the raw http server
@@ -19,10 +20,11 @@ app.use(express.static(publicDirPath));
 io.on('connection', (socket) => {
     console.log('New WebSocket Connection');
 
-    socket.emit('message', 'Welcome'); // Emit to single client
+    // Emit to single client
+    socket.emit('message', generateMessage('Welcome')); 
 
     // Only emit to other connections
-    socket.broadcast.emit('message', 'A new user has joined')
+    socket.broadcast.emit('message', generateMessage('A new user has joined'));
 
     socket.on('sendMessage', (message, callback) => {
         const filter = new Filter();
@@ -31,13 +33,13 @@ io.on('connection', (socket) => {
             return callback('You Dirty Bastard');
         }
 
-        io.emit('message', message); // emit to all clients
+        io.emit('message', generateMessage(message)); // emit to all clients
         callback(); // Acknowledges event
     });
 
     socket.on('sendLocation', (coords, callback) => {
         const userCoords = `https://google.com/maps?q=${coords.latitude},${coords.longitude}`
-        io.emit('locationMessage', userCoords); // emit to all clients
+        io.emit('locationMessage', generateLocationMessage(userCoords)); // emit to all clients
         callback();
     });
 
