@@ -3,6 +3,7 @@
 // Import message and user functions
 const { generateMessage, generateLocationMessage } = require("./messages");
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
+const translate = require('./translate');
 
 exports = module.exports = function (io) {
 
@@ -10,6 +11,7 @@ exports = module.exports = function (io) {
   io.on("connection", (socket) => {
     console.log("New WebSocket Connection");
 
+    // When a user joins a group
     socket.on("join", (options, callback) => {
       const { error, user } = addUser({ id: socket.id, ...options });
 
@@ -19,7 +21,6 @@ exports = module.exports = function (io) {
 
       socket.join(user.room); // Add user to a group chat
 
-      // Send message to group
       socket.broadcast
         .to(user.room)
         .emit(
@@ -36,12 +37,15 @@ exports = module.exports = function (io) {
       callback();
     });
 
+    // When a user sends a message to a group
     socket.on("sendMessage", (message, callback) => {
+        translate();
       const user = getUser(socket.id);
       io.to(user.room).emit("message", generateMessage(user.username, message)); // emit to all clients
       callback(); // Acknowledges event
     });
 
+    // When a user send their location
     socket.on("sendLocation", (coords, callback) => {
       const user = getUser(socket.id);
       const userCoords = `https://google.com/maps?q=${coords.latitude},${coords.longitude}`;
@@ -52,10 +56,9 @@ exports = module.exports = function (io) {
       callback();
     });
 
-    // When connection is disconnected
+    // When user leaves group
     socket.on("disconnect", () => {
       const user = removeUser(socket.id);
-
       if (user) {
         io.to(user.room).emit(
           "message",
