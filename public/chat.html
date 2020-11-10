@@ -18,7 +18,23 @@
 
         <div class="chat__main">
             <div id="messages" class="chat__messages"></div>
+            <div class="translate">
+                <select name="translate-from" id="translate-from">
+                    <option value="english">English</option>
+                    <option value="german">German</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="french">French</option>
+                    <option value="irish">Irish</option>
+                  </select>
 
+                  <select name="translate-to" id="translate-to">
+                    <option value="english">English</option>
+                    <option value="german">German</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="french">French</option>
+                    <option value="irish">Irish</option>
+                  </select>
+            </div>
             <div class="compose">
                 <form id="message-form">
                     <input name="message" placeholder="message" required autocomplete="off">

@@ -16,7 +16,7 @@ input {
 
 body {
     line-height: 1.4;
-    color: #333333;
+    color: #400303;
     font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -40,7 +40,7 @@ input {
 button {
     cursor: pointer;
     padding: 12px;
-    background: #7C5CBF;
+    background: #db1212;
     border: none;
     color: white;
     font-size: 16px;
@@ -48,18 +48,23 @@ button {
 }
 
 button:hover {
-    background: #6b47b8;
+    background:#db1212;
 }
 
 button:disabled {
     cursor: default;
-    background: #7c5cbf94;
+    background: #db1212;
+}
+
+select {
+    min-width: 180px;
+    min-height: 40px;
 }
 
 /* Join Page Styles */
 
 .centered-form {
-    background: #333744;
+    background: #400303;
     width: 100vw;
     height: 100vh;   
     display: flex;
@@ -92,7 +97,7 @@ button:disabled {
 .chat__sidebar {
     height: 100vh;
     color: white;
-    background: #333744;
+    background: #400303;
     width: 225px;
     overflow-y: scroll
 }
@@ -139,7 +144,7 @@ button:disabled {
     display: flex;
     flex-shrink: 0;
     margin-top: 16px;
-    padding: 24px;
+    padding: 6px 24px 24px 24px;
 }
 
 .compose form {
@@ -165,7 +170,7 @@ button:disabled {
 .room-title {
     font-weight: 400;
     font-size: 22px;
-    background: #2c2f3a;
+    background: #1D1F26;
     padding: 24px;   
 }
 
@@ -180,4 +185,8 @@ button:disabled {
     list-style-type: none;
     font-weight: 300;
     padding: 12px 24px 0 24px;
+}
+
+.translate {
+    padding: 0px 24px;
 }
