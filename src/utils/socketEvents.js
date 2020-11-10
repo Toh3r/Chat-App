@@ -1,12 +1,11 @@
 // Handle Socket Events
 
 // Import message and user functions
-const Filter = require("bad-words");
 const { generateMessage, generateLocationMessage } = require("./messages");
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
 exports = module.exports = function (io) {
-    
+
   // On user connect
   io.on("connection", (socket) => {
     console.log("New WebSocket Connection");
@@ -39,12 +38,6 @@ exports = module.exports = function (io) {
 
     socket.on("sendMessage", (message, callback) => {
       const user = getUser(socket.id);
-      const filter = new Filter();
-
-      if (filter.isProfane(message)) {
-        return callback("You Dirty Bastard");
-      }
-
       io.to(user.room).emit("message", generateMessage(user.username, message)); // emit to all clients
       callback(); // Acknowledges event
     });
