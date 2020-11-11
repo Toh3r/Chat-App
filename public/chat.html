@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Chat App</title>
+</head>
+
+<body>
+    <div class="chat">
+
+        <div id="sidebar" class="chat__sidebar">
+
+        </div>
+
+        <div class="chat__main">
+            <div id="messages" class="chat__messages"></div>
+            <div class="translate">
+                <button id="translate-btn">Activate Translate</button>
+                <span id="translate-selects">
+                    <label for="translate-from">From</label>
+                    <select name="translate-from" id="translate-from">
+                        <option value="en">English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="eu">Basque</option>
+                        <option value="bn">Bengali</option>
+                        <option value="bs">Bosnian</option>
+                        <option value="bg">Bulgarian</option>
+                        <option value="ca">Catalan</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="hr">Croatian</option>
+                        <option value="cs">Czech</option>
+                        <option value="da">Danish</option>
+                        <option value="nl">Dutch</option>
+                        <option value="et">Estonian</option>
+                        <option value="fi">Finnish</option>
+                        <option value="fr">French</option>
+                        <option value="fr">French (Canadian)</option>
+                        <option value="de">German</option>
+                        <option value="el">Greek</option>
+                        <option value="gu">Gujarati</option>
+                        <option value="he">Hebrew</option>
+                        <option value="hi">Hindi</option>
+                        <option value="hu">Hungarian</option>
+                        <option value="ga">Irish</option>
+                        <option value="id">Indonesian</option>
+                        <option value="it">Italian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="lv">Latvian</option>
+                        <option value="lt">Lithuanian</option>
+                        <option value="ms">Malay</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mt">Maltese</option>
+                        <option value="cnr">Montenegrin</option>
+                        <option value="ne">Nepali</option>
+                        <option value="nb">Norwegian Bokmål</option>
+                        <option value="pl">Polish</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ro">Romanian</option>
+                        <option value="ru">Russian</option>
+                        <option value="sr">Serbian</option>
+                        <option value="si">Sinhala</option>
+                        <option value="sk">Slovak</option>
+                        <option value="sl">Slovenian</option>
+                        <option value="es">Spanish</option>
+                        <option value="sv">Swedish</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">telugu</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="uk">Ukranian</option>
+                        <option value="ur">Urdu</option>
+                        <option value="vi">Vietnamese</option>
+                        <option value="cy">Welsh</option>
+                    </select>
+
+                    <label for="translate-to">To</label>
+                    <select name="translate-to" id="translate-to">
+                        <option value="en">English</option>
+                        <option value="ar">Arabic</option>
+                        <option value="eu">Basque</option>
+                        <option value="bn">Bengali</option>
+                        <option value="bs">Bosnian</option>
+                        <option value="bg">Bulgarian</option>
+                        <option value="ca">Catalan</option>
+                        <option value="zh">Chinese (Simplified)</option>
+                        <option value="zh-TW">Chinese (Traditional)</option>
+                        <option value="hr">Croatian</option>
+                        <option value="cs">Czech</option>
+                        <option value="da">Danish</option>
+                        <option value="nl">Dutch</option>
+                        <option value="et">Estonian</option>
+                        <option value="fi">Finnish</option>
+                        <option value="fr">French</option>
+                        <option value="fr">French (Canadian)</option>
+                        <option value="de">German</option>
+                        <option value="el">Greek</option>
+                        <option value="gu">Gujarati</option>
+                        <option value="he">Hebrew</option>
+                        <option value="hi">Hindi</option>
+                        <option value="hu">Hungarian</option>
+                        <option value="ga">Irish</option>
+                        <option value="id">Indonesian</option>
+                        <option value="it">Italian</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ko">Korean</option>
+                        <option value="lv">Latvian</option>
+                        <option value="lt">Lithuanian</option>
+                        <option value="ms">Malay</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mt">Maltese</option>
+                        <option value="cnr">Montenegrin</option>
+                        <option value="ne">Nepali</option>
+                        <option value="nb">Norwegian Bokmål</option>
+                        <option value="pl">Polish</option>
+                        <option value="pt">Portuguese</option>
+                        <option value="ro">Romanian</option>
+                        <option value="ru">Russian</option>
+                        <option value="sr">Serbian</option>
+                        <option value="si">Sinhala</option>
+                        <option value="sk">Slovak</option>
+                        <option value="sl">Slovenian</option>
+                        <option value="es">Spanish</option>
+                        <option value="sv">Swedish</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">telugu</option>
+                        <option value="th">Thai</option>
+                        <option value="tr">Turkish</option>
+                        <option value="uk">Ukranian</option>
+                        <option value="ur">Urdu</option>
+                        <option value="vi">Vietnamese</option>
+                        <option value="cy">Welsh</option>
+                    </select>
+                </span>
+            </div>
+            <div class="compose">
+                <form id="message-form">
+                    <input name="message" placeholder="message" required autocomplete="off">
+                    <button>Send</button>
+                </form>
+
+                <button id="send-location">Send Location</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- hbs templates -->
+    <script id="message-template" type="text/html">
+        <div class='message'>
+            <p>
+                <span class='message__name'>{{username}}</span>
+                <span class='message__meta'>{{createdAt}}</span> 
+            </p>
+            <p>{{message}}</p>
+        </div>
+    </script>
+
+    <script id="location-message-template" type="text/html">
+        <div class='message'>
+            <p>
+                <span class='message__name'>{{username}}</span>
+                <span class='message__meta'>{{createdAt}}</span> 
+            </p>
+            <p><a href="{{url}}" target="_blank">My current location</a></p>
+        </div>
+    </script>
+
+    <script id="sidebar-template" type="text/html">
+        <h2 class='room-title'>{{room}}</h2>
+        <h3 class='list-title'>Users</h3>
+        <ul class='users'>
+            {{#users}}
+                <li>{{username}}</li>
+            {{/users}}
+        </ul>
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+</body>
+
+</html>
